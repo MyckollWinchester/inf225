@@ -3,7 +3,7 @@
 Continuación del proyecto de Análisis y Diseño de Software.
 
 > [!IMPORTANT]
-> Este no es el proyecto original, se está migrando desde https://github.com/JoseMiGuerrero16/Proyecto-INF236-Grupo10
+> Este repositorio aún no tiene el contenido del proyecto original, se debe migrar el código desde [este repositorio](https://github.com/JoseMiGuerrero16/Proyecto-INF236-Grupo10).
 
 ## Integrantes
 
