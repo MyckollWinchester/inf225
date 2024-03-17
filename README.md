@@ -1,6 +1,9 @@
-# PROYECTO INF225
+# Grupo 1 - Apprende Custom Search
 
 Continuación del proyecto de Análisis y Diseño de Software.
+
+> [!IMPORTANT]
+> Este no es el proyecto original, se está migrando desde https://github.com/JoseMiGuerrero16/Proyecto-INF236-Grupo10
 
 ## Integrantes
 
@@ -16,6 +19,8 @@ Continuación del proyecto de Análisis y Diseño de Software.
 
 ## Instalación
 
+Crear un entorno virtual y activarlo.
+
 ```
 python -m venv .venv
 ```
@@ -24,11 +29,19 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
+Instalar dependencias.
+
 ```
 pip install -r requirements.txt
 ```
 
 ## Ejecución
+
+Activar el entorno virtual y ejecutar el programa.
+
+```
+.venv\Scripts\activate
+```
 
 ```
 py app.py
