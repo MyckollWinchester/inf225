@@ -1,3 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+  --main-color-accent: #6366F1;
+  --primary-text-color: #1B2027;
+  --secondary-text-color: #FFFFFF;
+  --primary-bg-color: #F7F8FB;
+  --secondary-bg-color: #FFFFFF;
+  --primary-line-color: #D6DBE4;
+  --secondary-line-color: #C0C8D3;
+}
+
+/* CSS Reset */
 * {
   margin: 0;
   min-width: 0;
@@ -26,3 +38,41 @@ h1, h2, h3, h4, h5, h6 {
 p {
   text-wrap: pretty;
 }
+
+/* Temp */
+.container {
+  min-height: 100dvh;
+  display: grid;
+  place-content: center;
+}
+
+body {
+  font-family: "lexend";
+  background: var(--primary-bg-color);
+}
+
+/* BEM */
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 196px;
+  height: 30px;
+  border-radius: 2px;
+  background: linear-gradient(to top, #5047E5, #6264F0);
+  color: var(--secondary-text-color);
+  border: none;
+  border-top: rgba(255, 255, 255, 0.4) 1.5px solid;
+  outline: #4338CA 1px solid;
+  padding-bottom: 2.5px;
+}
+.button:hover {
+  cursor: pointer;
+}
+.button--red {
+  filter: hue-rotate(90deg);
+}
+.button--green {
+  filter: hue-rotate(270deg);
+}/*# sourceMappingURL=base.css.map */
