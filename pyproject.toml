@@ -1,0 +1,11 @@
+[tool.ruff]
+exclude       = [".venv", "__pycache__", ".vscode", "test.py"]
+extend-select = ["ALL"]
+ignore        = ["ANN101", "ASYNC", "COM812", "D", "E501", "F403", "F405", "FBT", "PLR0913", "PTH", "S201", "T201", "W191"]
+
+target-version = "py312"
+show-fixes     = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "tab"
