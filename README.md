@@ -5,7 +5,7 @@ Continuación del proyecto de Análisis y Diseño de Software.
 ## Integrantes
 
 - Gabriel Apablaza V.
-- José Guerrero C.
+- Diego Concha B.
 - Andrés Saldias S.
 - Myckoll Winchester M.
 
