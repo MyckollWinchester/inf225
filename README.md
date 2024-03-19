@@ -19,30 +19,52 @@ Continuación del proyecto de Análisis y Diseño de Software.
 
 ## Instalación
 
-Crear un entorno virtual y activarlo.
+### Windows
 
-```
+```bash
 python -m venv .venv
 ```
 
-```
+```bash
 .venv\Scripts\activate
 ```
 
-Instalar dependencias.
-
+```bash
+pip install -r requirements.txt
 ```
+
+### Linux
+
+```bash
+python3 -m venv .venv
+```
+
+```bash
+source .venv/bin/activate
+```
+
+```bash
 pip install -r requirements.txt
 ```
 
 ## Ejecución
 
-Activar el entorno virtual y ejecutar el programa.
+### Windows
 
-```
+```bash
 .venv\Scripts\activate
 ```
 
-```
+```bash
 py app.py
+```
+
+### Linux
+
+```bash
+source .venv/bin/activate
+```
+
+```bash
+python3 app.py
 ```
