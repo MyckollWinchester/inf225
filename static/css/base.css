@@ -41,7 +41,7 @@ p {
 
 /* Temp */
 .container {
-  height: 256px;
+  min-height: calc(100dvh - 56px); /* viewport - navbar height*/
   display: grid;
   place-content: center;
 }
