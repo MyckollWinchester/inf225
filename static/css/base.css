@@ -41,7 +41,7 @@ p {
 
 /* Temp */
 .container {
-  min-height: 100dvh;
+  height: 256px;
   display: grid;
   place-content: center;
 }
@@ -52,6 +52,48 @@ body {
 }
 
 /* BEM */
+.header {
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  background-color: var(--secondary-bg-color);
+  border-bottom: 1px solid var(--primary-line-color);
+}
+.header__logo {
+  min-width: 28px;
+  min-height: 28px;
+  background-color: var(--main-color-accent);
+  background-image: url("../img/amogus.png");
+  background-size: 28px;
+  border-radius: 6px;
+  margin: 0 8px;
+}
+.header__logo:hover {
+  background-color: #637bf1;
+  background-image: url("../img/amogus-hover.png");
+}
+.header__logo:hover img {
+  opacity: 0;
+}
+.header__separator {
+  height: 12px;
+  width: auto;
+  margin-right: 8px;
+}
+.header__app-name {
+  color: var(--primary-text-color);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1875rem;
+  line-height: 1.25rem;
+  margin-right: 8px;
+  text-wrap: nowrap;
+}
+.header__app-name:hover {
+  text-decoration: underline;
+}
+
 .button {
   display: flex;
   justify-content: center;
