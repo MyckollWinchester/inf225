@@ -27,20 +27,20 @@
     <aside class="navbar-container">
       <nav class="navbar">
         <h2 class="navbar__category">General</h2>
-        <a href="#" class="navbar__item navbar__item--selected">
+        {% block talleristas %}<a href="{{ url_for('views.talleristas') }}" class="navbar__item">{% endblock %}
           <div class="navbar__icon">👨‍🎨</div>
           Talleristas
         </a>
-        <a href="#" class="navbar__item">
+        {% block insumos %}<a href="{{ url_for('views.insumos') }}" class="navbar__item">{% endblock %}
           <div class="navbar__icon">🛒</div>
           Insumos
         </a>
-        <a href="#" class="navbar__item">
+        {% block marcadores %}<a href="{{ url_for('views.marcadores') }}" class="navbar__item">{% endblock %}
           <div class="navbar__icon">⭐</div>
           Marcadores
         </a>
         <h2 class="navbar__category">Ejemplo</h2>
-        <a href="#" class="navbar__item">
+        {% block ejemplo %}<a href="{{ url_for('views.ejemplo') }}" class="navbar__item">{% endblock %}
           <div class="navbar__icon">💢</div>
           Ejemplo
         </a>
@@ -52,6 +52,7 @@
   </div>
 </body>
 
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
 {% block script %}{% endblock %}
 
 </html>

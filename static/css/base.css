@@ -148,6 +148,7 @@ main {
   background-color: var(--item-background-color);
   border: 1px solid var(--item-line-color);
   color: var(--primary-text-color);
+  font-weight: 400;
 }
 .navbar__icon {
   width: 40px;
