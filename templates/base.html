@@ -24,6 +24,7 @@
     </svg> -->
   </header>
   <div>
+    {% block navbar %}
     <aside class="navbar-container">
       <nav class="navbar">
         <h2 class="navbar__category">General</h2>
@@ -46,6 +47,7 @@
         </a>
       </nav>
     </aside>
+    {% endblock %}
     <main>  
       {% block content %}{% endblock %}
     </main>

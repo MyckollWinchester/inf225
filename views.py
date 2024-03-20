@@ -24,4 +24,4 @@ def ejemplo() -> str:
 
 @views.get("/404")
 def not_found() -> str:
-    return "404"
+    return render_template("not_found.html")
