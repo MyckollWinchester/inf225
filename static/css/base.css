@@ -156,6 +156,26 @@ main {
 }
 
 /* Components */
+.section-title {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 16px;
+  font-weight: 500;
+  font-size: 1.1875rem;
+}
+
+.note {
+  font-weight: 300;
+  margin-bottom: 2rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--primary-line-color);
+  background: #EFF0F3;
+  color: #777879;
+}
+
 .button {
   display: flex;
   justify-content: center;
