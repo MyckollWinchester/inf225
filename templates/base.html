@@ -27,6 +27,10 @@
     {% block navbar %}
     <aside class="navbar-container">
       <nav class="navbar">
+        {% block inicio %}<a href="{{ url_for('views.index') }}" class="navbar__item">{% endblock %}
+          <div class="navbar__icon">🏠</div>
+          Inicio
+        </a>
         <h2 class="navbar__category">General</h2>
         {% block talleristas %}<a href="{{ url_for('views.talleristas') }}" class="navbar__item">{% endblock %}
           <div class="navbar__icon">👨‍🎨</div>

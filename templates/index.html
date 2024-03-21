@@ -6,21 +6,36 @@
 {% endblock %}
 
 
-{% block talleristas %}
-<a href="#" class="navbar__item navbar__item--selected">
+{% block inicio %}
+<a href="{{ url_for('views.index') }}" class="navbar__item navbar__item--selected">
 {% endblock %}
 
 
 {% block content %}
 <div class="container">
-  <button class="button">
-    Eat cakeroll
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="24px" fill="white" x="0px" y="0px">
-      <g data-name="Layer 2">
-        <path d="M28,19h-.967A7.32,7.32,0,0,0,29,13.986,7.165,7.165,0,0,0,22,7H10A6.993,6.993,0,0,0,5.111,19H4a2,2,0,0,0-2,2,5.006,5.006,0,0,0,5,5H25a5.006,5.006,0,0,0,5-5A2,2,0,0,0,28,19ZM22,9a5.131,5.131,0,0,1,5,5.014c.034,2.449-1.933,4.87-4.048,4.986H15.033A7.32,7.32,0,0,0,17,13.986,7.316,7.316,0,0,0,14.8,9ZM7.83,17.442c-.718-1.068-.955-2.813-.089-3.771a2.269,2.269,0,0,1,1.6-.752,1.637,1.637,0,0,1,.409.051c.329.083,1.194.445,1.249,1.112a1.508,1.508,0,0,1-.6,1.117,1,1,0,1,0,1.2,1.6A3.492,3.492,0,0,0,13,13.918a3.478,3.478,0,0,0-2.75-2.887,4.135,4.135,0,0,0-3.988,1.3,4.36,4.36,0,0,0-1.074,3.02A5,5,0,0,1,10,9a5.131,5.131,0,0,1,5,5.014c.034,2.449-1.933,4.87-4.048,4.986h-.147A3.606,3.606,0,0,1,7.83,17.442ZM25,24H7a3,3,0,0,1-3-3H28A3,3,0,0,1,25,24Z" />
-      </g>
+  <h2 class="section-title">
+    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none">
+      <path d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15" stroke="#c0c8d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 12H15" stroke="#c0c8d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 16H15" stroke="#c0c8d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#c0c8d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="9" cy="12" r="1" fill="#c0c8d3"/>
+      <circle cx="9" cy="16" r="1" fill="#c0c8d3"/>
     </svg>
-  </button>
+    Resumen
+  </h2>
+
+  <div class="note">TO-DO:<br>Poner gráficos y estadísticas del estado del sistema.<br>Por ejemplo, la cantidad de marcadores que hay para talleristas e insumos, cantidad de talleristas contactados, etc.</div>
+  
+  <h2 class="section-title">
+    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 10C9 9.40666 9.17595 8.82664 9.50559 8.33329C9.83524 7.83994 10.3038 7.45543 10.852 7.22836C11.4001 7.0013 12.0033 6.94189 12.5853 7.05765C13.1672 7.1734 13.7018 7.45912 14.1213 7.87868C14.5409 8.29824 14.8266 8.83279 14.9424 9.41473C15.0581 9.99667 14.9987 10.5999 14.7716 11.1481C14.5446 11.6962 14.1601 12.1648 13.6667 12.4944C13.1734 12.8241 12.5933 13 12 13V14M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#c0c8d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="17" r="1" fill="#c0c8d3"/>
+    </svg>
+    Ayuda
+  </h2>
+  
+  <div class="note">TO-DO:<br>Poner instrucciones de uso para cada una de las vistas.</div>
 </div>
 {% endblock %}
 
