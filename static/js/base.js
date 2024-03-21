@@ -27,3 +27,22 @@ navElements.forEach(anchor => {
       })
   })
 })
+
+window.addEventListener('popstate', () => {
+  navElements.forEach(anchor => {
+    anchor.classList.remove('navbar__item--selected')
+  })
+
+  const path = window.location.pathname
+  const selectedAnchor = document.querySelector(`a[href="${path}"]`)
+  selectedAnchor.classList.add('navbar__item--selected')
+
+  fetch(path)
+    .then(response => response.text())
+    .then(html => {
+      const parser = new DOMParser()
+      const newDocument = parser.parseFromString(html, 'text/html')
+      const newContent = newDocument.querySelector('.container')
+      document.querySelector('.container').innerHTML = newContent.innerHTML
+    })
+})
