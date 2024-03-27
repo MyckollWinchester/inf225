@@ -1,4 +1,4 @@
-# Restrospectiva
+# Retrospectiva del proyecto anterior
 
 Contenidos del informe de retrospectiva solicitado en el hito 1:
 
@@ -8,3 +8,10 @@ Contenidos del informe de retrospectiva solicitado en el hito 1:
 4. [Alphas más prioritarios](4-alphas-prioritarios.md)
 5. [Riesgos identificados](5-riesgos-identificados.md)
 6. [Material adicional](6-material-adicional.md)
+
+<div style="text-align: right;">
+
+[Ir al siguiente &rightarrow;](1-actualizacion-integrantes.md)
+
+</div>
+

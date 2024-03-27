@@ -1,3 +1,5 @@
+[&#10066; Volver al índice](README.md)
+
 # Actualización de los integrantes del grupo
 
 ## Integrantes de los proyectos anteriores
@@ -16,8 +18,18 @@
 - <span style="opacity: 0.5;">Joaquín Véliz C.</span>
 
 ## Integrantes de este proyecto
-
+ 
 - Gabriel Apablaza V.
 - Diego Concha B.
 - Andrés Saldias S.
 - Myckoll Winchester M.
+
+<div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+
+[&leftarrow; Ir al anterior](1-actualizacion-integrantes.md)
+
+<div style="text-align: right;">
+
+[Ir al siguiente &rightarrow;](2-proyecto-base.md)
+
+</div>
