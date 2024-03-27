@@ -8,7 +8,7 @@
 - <span style="color: orange;">**Andrés Saldias S.**</span>
 - <span style="color: orange;">**Myckoll Winchester M.**</span>
 
-### Proyecto 2: Grupo 7 - Paralelo 1
+### Proyecto 2: Grupo 4 - Paralelo 1
 
 - <span style="color: orange;">**Gabriel Apablaza V.**</span>
 - <span style="color: orange;">**Diego Concha B.**</span>
