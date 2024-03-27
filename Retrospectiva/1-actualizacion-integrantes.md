@@ -1,1 +1,1 @@
-# Actualización del equipo
+# Actualización de los integrantes del grupo
