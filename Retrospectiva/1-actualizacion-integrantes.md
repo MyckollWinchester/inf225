@@ -24,6 +24,4 @@
 - Andrés Saldias S.
 - Myckoll Winchester M.
 
-[&leftarrow; Ir al anterior](1-actualizacion-integrantes.md)
-
 [Ir al siguiente &rightarrow;](2-proyecto-base.md)

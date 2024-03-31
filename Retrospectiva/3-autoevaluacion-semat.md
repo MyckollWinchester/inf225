@@ -1,3 +1,5 @@
+[&#10066; Volver al índice](README.md)
+
 # Autoevaluación del estado del proyecto (basado en SEMAT)
 
 ## Stakeholders
@@ -40,3 +42,8 @@ Teniendo en cuenta que hay nuevos integrantes en el grupo, para alcanzar el esta
 - Estado: `Coherent`
 
 Se establecieron los requisitos del sistema, su propósito, y las prioridades. Nos falta saber cómo abordar el problema ?  ???? ? ? ?
+
+
+[&leftarrow; Ir al anterior](2-proyecto-base.md)
+
+[Ir al siguiente &rightarrow;](4-alphas-prioritarios.md)

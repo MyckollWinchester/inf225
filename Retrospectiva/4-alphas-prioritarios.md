@@ -1,3 +1,5 @@
+[&#10066; Volver al índice](README.md)
+
 # Alphas más prioritarios
 
 Una vez concretada la autoevaluacion basada en SEMAT, podemos rescatar los dos alphas que consideramos mas importantes:
@@ -15,3 +17,7 @@ Todo el desarollo del proyecto se cementa en los requerimientos, si estos son mu
 La evaluacion controla al detalle cada paso que debiera ser seguido para tener una correcta implementacion, especificando todo lo que debiera estar claro y quienes debieran estar de acuerdo
 
 En nuestro caso el proyecto alcanzo un estado 3 de esta Alpha, siendo el analizar hacia donde la oportunidad esta dirigida y el como se avalua los pasos que debieran ser revisados
+
+[&leftarrow; Ir al anterior](3-autoevaluacion-semat.md)
+
+[Ir al siguiente &rightarrow;](5-riesgos-identificados.md)
