@@ -15,6 +15,7 @@ Se identificaron los grupos de stakeholders y se definieron las responsabilidade
 La situación que el sistema quiere resolver está identificada y clara, al igual que su posible solución. Tenemos que determinar el criterio de éxito del sistema, entender su valor, y tener claro y cuantificados los resultados.
 
 ## Software System
+
 - Estado: -
 
 Para alcanzar el primer estado: `Architecture Selected`, falta identificar las plataformas de hardware del sistema y tomar decisiones sobre la organización para el proyecto.
@@ -41,8 +42,7 @@ Teniendo en cuenta que hay nuevos integrantes en el grupo, para alcanzar el esta
 
 - Estado: `Coherent`
 
-Se establecieron los requisitos del sistema, su propósito, y las prioridades. Nos falta saber cómo abordar el problema ?  ???? ? ? ?
-
+Se establecieron los requisitos del sistema, su propósito, y las prioridades. Nos falta analizar hacia dónde la oportunidad está dirigida y cómo evaluarla.
 
 [&leftarrow; Ir al anterior](2-proyecto-base.md)
 
