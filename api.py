@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
+
 from database.models.tallerista import Tallerista
-from database.scripts.jumbo_search import jumbo_search
-from typing import List
+from database.scripts.web_scrapers import jumbo_search
 
 app = FastAPI()
 client = AsyncIOMotorClient("mongodb://localhost:27017")
@@ -17,22 +17,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/talleristas/", response_model=List[Tallerista])
-async def get_talleristas():
-    talleristas = await db["talleristas"].find().to_list(128)
-    return talleristas
+@app.get("/talleristas/", response_model=list[Tallerista])
+async def get_talleristas() -> list[Tallerista]:
+    return await db["talleristas"].find().to_list(128)
 
 @app.post("/verificar-tallerista/", response_model=Tallerista)
-async def verificar_tallerista(tallerista: Tallerista):
-    tallerista = await db["talleristas"].find_one_and_update(
+async def verificar_tallerista(tallerista: Tallerista) -> Tallerista:
+    return await db["talleristas"].find_one_and_update(
         {"enlace": tallerista.enlace},
         {"$set": {"verificado": not tallerista.verificado}},
         return_document=True
     )
-    return tallerista
 
-@app.get("/buscar-insumo/", response_model=List[dict])
-async def buscar_insumo(prompt: str):
+@app.get("/buscar-insumo/", response_model=list[dict])
+async def buscar_insumo(prompt: str) -> list[dict]:
     if not prompt:
         raise HTTPException(
             status_code=400,
