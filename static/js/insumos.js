@@ -2,21 +2,12 @@ const searchInput = document.getElementById('search-input')
 const searchButton = document.getElementById('search-button')
 const searchForm = document.getElementById('search-form-insumo')
 
-async function getTalleristas() {
-  await new Promise(resolve => setTimeout(resolve, 1000))
-
-  return [
-    { id: 1, name: 'Insumo 1' },
-    { id: 2, name: 'Insumo 2' },
-    { id: 3, name: 'Insumo 3' },
-    { id: 4, name: 'Insumo 4' },
-    { id: 5, name: 'Insumo 5' },
-    { id: 6, name: 'Insumo 6' },
-    { id: 7, name: 'Insumo 7' },
-    { id: 8, name: 'Insumo 8' },
-    { id: 9, name: 'Insumo 9' },
-    { id: 10, name: 'Insumo 10' },
-  ]
+async function getInsumos(prompt) {
+  const response = await fetch(`http://localhost:8000/buscar-insumo/?prompt=${prompt}`)
+  const data = await response.json()
+  return data
+  // const response = await fetch('static/json/dummy-insumos.json')
+  // return data = response.json()
 }
 
 searchForm.addEventListener('submit', async e => {
@@ -30,7 +21,6 @@ searchForm.addEventListener('submit', async e => {
     Buscar
   `
 
-  console.log(searchButton.children[0])
   searchButton.children[0].classList.add('rotating')
   searchButton.style.opacity = 0.75
 
@@ -38,8 +28,45 @@ searchForm.addEventListener('submit', async e => {
 
   searchButton.style.cursor = 'default'
   
-  await getTalleristas().then(insumos => {
-    console.log(insumos)
+  await getInsumos(searchInput.value).then(insumos => {
+    const insumosRes = document.getElementById('insumo-search-results')
+    insumosRes.innerHTML = ''
+
+    insumos.forEach(insumo => {
+      const card = document.createElement('div')
+      card.classList.add('insumo-card')
+
+      const imageContainer = document.createElement('div')
+      imageContainer.classList.add('insumo-card__image-container')
+
+      const image = document.createElement('img')
+      image.src = insumo.imagen
+      image.classList.add('insumo-card__image')
+
+      const name = document.createElement('h1')
+      name.classList.add('insumo-card__name')
+      name.innerHTML = insumo.nombre
+
+      const price = document.createElement('h2')
+      price.classList.add('insumo-card__price')
+      const formattedPrice = insumo.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      price.innerHTML = `$${formattedPrice}`
+
+      const button = document.createElement('a')
+      button.classList.add('button', 'insumo-card__button')
+      button.href = insumo.enlace
+      button.target = '_blank'
+      button.rel = 'noopener noreferrer'
+      button.innerHTML = 'Abrir en Jumbo'
+
+      imageContainer.appendChild(image)
+      card.appendChild(imageContainer)
+      card.appendChild(name)
+      card.appendChild(price)
+      card.appendChild(button)
+
+      insumosRes.appendChild(card)
+    })
   })
 
   searchButton.style.opacity = 1
@@ -54,8 +81,6 @@ searchForm.addEventListener('submit', async e => {
   searchButton.style.cursor = 'pointer'
 
   searchButton.removeAttribute('disabled')
-
-  console.log(searchInput.value)
 })
 
 searchInput.addEventListener('input', e => {

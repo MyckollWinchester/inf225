@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from database.models.tallerista import Tallerista
+from database.scripts.jumbo_search import jumbo_search
 from typing import List
 
 app = FastAPI()
@@ -16,12 +17,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/talleristas/', response_model=List[Tallerista])
+@app.get("/talleristas/", response_model=List[Tallerista])
 async def get_talleristas():
-    talleristas = await db['talleristas'].find().to_list(128)
+    talleristas = await db["talleristas"].find().to_list(128)
     return talleristas
 
-@app.post('/verificar-tallerista/', response_model=Tallerista)
+@app.post("/verificar-tallerista/", response_model=Tallerista)
 async def verificar_tallerista(tallerista: Tallerista):
-    tallerista = await db['talleristas'].find_one_and_update({'enlace': tallerista.enlace}, {'$set': {'verificado': not tallerista.verificado}}, return_document=True)
+    tallerista = await db["talleristas"].find_one_and_update(
+        {"enlace": tallerista.enlace},
+        {"$set": {"verificado": not tallerista.verificado}},
+        return_document=True
+    )
     return tallerista
+
+@app.get("/buscar-insumo/", response_model=List[dict])
+async def buscar_insumo(prompt: str):
+    if not prompt:
+        raise HTTPException(
+            status_code=400,
+            detail="Búsqueda vacía."
+        )
+    return jumbo_search(prompt)

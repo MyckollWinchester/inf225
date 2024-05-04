@@ -81,6 +81,7 @@ main {
   display: flex;
   align-items: center;
   gap: 4px;
+  margin-bottom: 16px;
 }
 .search-form__text-input {
   width: 512px;
@@ -102,7 +103,6 @@ main {
 
 .note {
   font-weight: 300;
-  margin-bottom: 2rem;
   width: -moz-fit-content;
   width: fit-content;
   padding: 1rem;
@@ -235,7 +235,7 @@ main {
   text-align: center;
 }
 
-.card {
+.tallerista-card {
   display: flex;
   background-color: var(--secondary-bg-color);
   padding: 16px;
@@ -243,27 +243,61 @@ main {
   border-radius: 8px;
   border: 1px solid var(--primary-line-color);
 }
-.card__title {
+.tallerista-card__title {
   font-weight: 500;
-  font-size: 1.14693115rem;
+  font-size: 1.15rem;
   margin-bottom: 8px;
 }
-.card__image {
+.tallerista-card__image {
   max-width: 100%;
   width: 128px;
 }
-.card__contact {
+.tallerista-card__contact {
   flex: 1;
   display: flex;
   align-items: center;
   gap: 16px;
 }
-.card__button {
+.tallerista-card__button {
   font-size: 0.75rem;
   height: 16px;
 }
-.card__button--false {
+.tallerista-card__button--false {
   filter: hue-rotate(90deg);
+}
+
+#insumo-search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.insumo-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary-bg-color);
+  padding: 16px;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--primary-line-color);
+}
+.insumo-card__name {
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+.insumo-card__price {
+  color: var(--main-color-accent);
+}
+.insumo-card__image-container {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+.insumo-card__image {
+  text-align: center;
+  max-width: 100%;
+  width: 256px;
 }
 
 /* Animations */
