@@ -1,9 +1,6 @@
 # Grupo 1 - Apprende Custom Search
 
-Continuación del proyecto de Análisis y Diseño de Software.
-
-> [!IMPORTANT]
-> Este repositorio aún no tiene el contenido del proyecto original, se debe migrar el código desde [este repositorio](https://github.com/JoseMiGuerrero16/Proyecto-INF236-Grupo10).
+Continuación del proyecto de Análisis y Diseño de Software 2023-2.
 
 ## Integrantes
 
@@ -16,6 +13,8 @@ Continuación del proyecto de Análisis y Diseño de Software.
 
 - Python 3.12
 - MongoDB 7.0
+
+MongoDB debe estar corriendo en el puerto 27017, y debe tener una base de datos llamada "apprende-custom-search" con una colección llamada "talleristas". Sensible a mayúsculas.
 
 ## Instalación
 
