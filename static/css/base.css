@@ -1,4 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@font-face {
+  font-family: "lexend";
+  src: url("../fonts/lexend/Lexend-VariableFont_wght.ttf") format("truetype");
+}
 :root {
   --main-color-accent: #6366F1;
   --primary-text-color: #1B2027;
