@@ -139,9 +139,23 @@ main {
 .button--green {
   filter: hue-rotate(270deg);
 }
+.button--gold {
+  background: linear-gradient(to top, #ff9900, #ffcc00);
+  outline: #ffb700 1px solid;
+}
 .button[disabled] {
   opacity: 0.65;
   cursor: not-allowed;
+}
+
+.fav-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.fav-button--active {
+  fill: #FF0000;
 }
 
 /* BEM */

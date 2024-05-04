@@ -4,6 +4,8 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from database.models.tallerista import Tallerista
 from database.scripts.web_scrapers import jumbo_search
+from database.scripts.openai_api import description_filter
+from database.scripts.google_api import google_custom_search
 
 app = FastAPI()
 client = AsyncIOMotorClient("mongodb://localhost:27017")
@@ -29,6 +31,16 @@ async def verificar_tallerista(tallerista: Tallerista) -> Tallerista:
         return_document=True
     )
 
+@app.get("/buscar-tallerista/", response_model=list[dict])
+async def buscar_tallerista(prompt: str) -> list[dict]:
+    if not prompt:
+        raise HTTPException(
+            status_code=400,
+            detail="Búsqueda vacía."
+        )
+    filtered_prompt = description_filter(prompt)
+    return google_custom_search(filtered_prompt)
+
 @app.get("/buscar-insumo/", response_model=list[dict])
 async def buscar_insumo(prompt: str) -> list[dict]:
     if not prompt:
@@ -37,3 +49,15 @@ async def buscar_insumo(prompt: str) -> list[dict]:
             detail="Búsqueda vacía."
         )
     return jumbo_search(prompt)
+
+@app.post("/marcar-tallerista/", response_model=dict[str, int | str])
+async def marcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
+    tallerista_db = await db["talleristas"].find_one({"enlace": tallerista.enlace})
+    if tallerista_db:
+        raise HTTPException(
+            status_code=409,
+            detail="Tallerista ya se encuentra en los marcadores."
+        )
+    tallerista = tallerista.model_dump()
+    await db["talleristas"].insert_one(tallerista)
+    return { "status": 200, "message": "Tallerista marcado." } 

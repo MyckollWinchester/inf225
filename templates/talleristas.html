@@ -2,7 +2,7 @@
 
 
 {% block head %}
-<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/talleristas.css') }}">
 {% endblock %}
 
 
@@ -19,7 +19,7 @@
     </svg>
     Búsqueda de talleristas
   </h2>
-  <form method="get" class="search-form" id="search-form-insumo">
+  <form method="get" class="search-form" id="search-form-talleristas">
     <input type="text" id="search-input" class="search-form__text-input" placeholder="Ingresa la descripción del taller">
     <button type="submit" id="search-button" class="button" disabled>
       <svg width="16px" height="16px" fill="currentColor" viewBox="0 0 256 256">
@@ -28,10 +28,11 @@
       Buscar
     </button>
   </form>
+  <div id="talleristas-search-results"></div>
 </div>
 {% endblock %}
 
 
 {% block script %}
-<script class="view-script"></script>
+<script class="view-script" src="{{ url_for('static', filename='js/talleristas.js' )}}"></script>
 {% endblock %}
