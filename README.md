@@ -19,8 +19,6 @@ Continuación del proyecto de Análisis y Diseño de Software.
 
 ## Instalación
 
-### Windows
-
 ```bash
 python -m venv .venv
 ```
@@ -33,23 +31,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### Linux
-
-```bash
-python3 -m venv .venv
-```
-
-```bash
-source .venv/bin/activate
-```
-
-```bash
-pip install -r requirements.txt
-```
-
 ## Ejecución
-
-### Windows
 
 ```bash
 .venv\Scripts\activate
@@ -59,12 +41,6 @@ pip install -r requirements.txt
 py app.py
 ```
 
-### Linux
-
 ```bash
-source .venv/bin/activate
-```
-
-```bash
-python3 app.py
+uvicorn api:app --reload
 ```
