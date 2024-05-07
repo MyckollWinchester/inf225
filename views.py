@@ -19,9 +19,9 @@ def insumos() -> str:
 def marcadores() -> str:
     return render_template("marcadores.html")
 
-@views.get("/ejemplo")
-def ejemplo() -> str:
-    return render_template("ejemplo.html")
+@views.get("/propuesta-taller")
+def propuesta_taller() -> str:
+    return render_template("propuesta_taller.html")
 
 @views.get("/404")
 def not_found() -> str:

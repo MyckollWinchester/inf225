@@ -1,0 +1,103 @@
+:root {
+  --main-color-accent: #6366F1;
+  --primary-text-color: #1B2027;
+  --secondary-text-color: #FFFFFF;
+  --placeholder-text-color: #B9BCC8;
+  --primary-bg-color: #F7F8FB;
+  --secondary-bg-color: #FFFFFF;
+  --primary-line-color: #D6DBE4;
+  --secondary-line-color: #B2B7BE;
+}
+
+.container {
+  max-width: 1694px;
+}
+
+textarea {
+  resize: none;
+  height: 112px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+
+.right-section__bottom {
+  display: grid;
+  place-items: center;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.form-section__contact {
+  margin-bottom: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+input[type=text], input[type=email], input[type=number], input[type=tel], textarea {
+  padding: 8px 16px;
+  border: 1px solid var(--primary-line-color);
+  border-radius: 4px;
+}
+input[type=text]:focus, input[type=email]:focus, input[type=number]:focus, input[type=tel]:focus, textarea:focus {
+  outline: none;
+  border-color: var(--main-color-accent);
+}
+
+.modalidad-taller-radios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  color: grey;
+}
+.modalidad-taller-radios label {
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 24px;
+  background-color: var(--primary-bg-color);
+  border: 1px solid var(--primary-line-color);
+  transition: background-color 75ms, color 75ms;
+}
+.modalidad-taller-radios label input[type=radio] {
+  display: none;
+}
+.modalidad-taller-radios label:has(input[type=radio]:checked) {
+  background-color: var(--main-color-accent);
+  color: var(--secondary-text-color);
+}
+
+.field-required {
+  color: var(--main-color-accent);
+}
+
+.two-inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 1300px) {
+  form {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .form-section__contact {
+    margin-bottom: 64px;
+  }
+}
+@media (max-width: 768px) {
+  .two-inline {
+    grid-template-columns: 1fr;
+  }
+}/*# sourceMappingURL=propuesta_taller.css.map */
