@@ -1,0 +1,50 @@
+:root {
+  --main-color-accent: #6366F1;
+  --primary-text-color: #1B2027;
+  --secondary-text-color: #FFFFFF;
+  --placeholder-text-color: #B9BCC8;
+  --primary-bg-color: #F7F8FB;
+  --secondary-bg-color: #FFFFFF;
+  --primary-line-color: #D6DBE4;
+  --secondary-line-color: #B2B7BE;
+}
+
+#talleristas-search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--secondary-bg-color);
+  padding: 16px;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--primary-line-color);
+
+  &__name {
+    font-weight: 500;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+
+  &__image {
+    border-radius: 8px;
+    max-width: 100%;
+    min-width: 128px;
+    width: 128px;
+  }
+
+  &__left {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__right {
+    min-width: 32px;
+    display: flex;
+    align-items: flex-start;
+  }
+}
