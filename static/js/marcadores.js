@@ -56,7 +56,7 @@ talleristas.then(response => {
 })
 
 const verificarTallerista = (e, i, data) => {
-  e.preventDefault()
+  e.preventDefault();
   fetch('http://localhost:8000/verificar-tallerista', {
     method: 'POST',
     body: JSON.stringify(data),
@@ -65,16 +65,17 @@ const verificarTallerista = (e, i, data) => {
     }
   })
   .then(response => {
-    return response.json()
+    return response.json();
   })
-  .then(data => {
-    console.log(data)
-  })
+  .then(updatedData => {
+    console.log(updatedData);
+    data.verificado = updatedData.verificado;
 
-  verificado = data.verificado ? false : true
-  const button = document.getElementById(`verificar-${i}`)
+    const button = document.getElementById(`verificar-${i}`);
 
-  button.innerHTML = verificado ? "Verificado" : "No verificado"
-  button.classList.remove(`tallerista-card__button--${data.verificado}`)
-  button.classList.add(`tallerista-card__button--${verificado}`)
-}
+    button.innerHTML = data.verificado ? "Verificado" : "No verificado";
+    button.classList.remove(`tallerista-card__button--${!data.verificado}`);
+    button.classList.add(`tallerista-card__button--${data.verificado}`);
+  });
+};
+
