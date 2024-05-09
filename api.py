@@ -62,6 +62,20 @@ async def marcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
     await db["talleristas"].insert_one(tallerista)
     return { "status": 200, "message": "Tallerista marcado." } 
 
+@app.post("/desmarcar-tallerista/", response_model=dict[str, int | str])
+async def desmarcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
+    tallerista_db = await db["talleristas"].find_one({"enlace": tallerista.enlace})
+    if tallerista_db:
+        tallerista = tallerista.model_dump()
+        await db["talleristas"].delete_one(tallerista)
+        return { "status": 200, "message": "Tallerista eliminado." } 
+    else:
+        raise HTTPException(
+            status_code=409,
+            detail="Tallerista no se encuentra en los marcadores."
+        )
+
+
 @app.get("/buscar-persona-en-db/")
 async def buscar_persona_en_db(prompt: str):
     if not prompt:
@@ -71,8 +85,8 @@ async def buscar_persona_en_db(prompt: str):
         )
     
     else:
-        tallerista_db = await db["talleristas"].find_one({"enlace": prompt}, {"verificado": 1, "_id": 0})
-        #print(prompt)
+        tallerista_db = await db["talleristas"].find_one({"enlace": prompt})
+        #print(tallerista_db)
         if tallerista_db:
             #tallerista_db['_id'] = str(tallerista_db['_id'])
             return True
