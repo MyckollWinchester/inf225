@@ -61,3 +61,18 @@ async def marcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
     tallerista = tallerista.model_dump()
     await db["talleristas"].insert_one(tallerista)
     return { "status": 200, "message": "Tallerista marcado." } 
+
+@app.get("/buscar-persona-en-db/")
+async def buscar_persona_en_db(prompt: str):
+    if not prompt:
+        raise HTTPException(
+            status_code=400,
+            detail="Búsqueda vacía."
+        )
+    
+    else:
+        tallerista_db = await db["talleristas"].find_one({"enlace": prompt}, {"verificado": 1, "_id": 0})
+        #print(prompt)
+        if tallerista_db:
+            #tallerista_db['_id'] = str(tallerista_db['_id'])
+            return True

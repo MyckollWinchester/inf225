@@ -7,6 +7,28 @@ async function getTalleristas(prompt) {
   return await response.json()  
 }
 
+async function getExistencia(prompt) {
+  const response = await fetch(`http://localhost:8000/buscar-persona-en-db/?prompt=${prompt}`)
+  return await response.json()  
+}
+
+async function getExistencias() {
+  const favButtons = document.querySelectorAll('.fav-button');
+  favButtons.forEach(async favButton => {
+    const card = favButton.parentElement.parentElement;
+    const cardLeft = card.children[0];
+    const cardProfile = cardLeft.children[1];
+    const cardLinkedIn = cardProfile.children[1];
+    const linkedin = cardLinkedIn.href;
+
+    const existencia = await getExistencia(linkedin);
+    console.log(linkedin, existencia)
+    if (existencia) {
+      favButton.children[0].setAttribute('fill', '#1B2027');
+    }
+  });
+}
+
 searchForm.addEventListener('submit', async e => {
   e.preventDefault()
   if (searchInput.value.trim() === '') return
@@ -90,6 +112,8 @@ searchForm.addEventListener('submit', async e => {
 
       talleristasSearchResults.appendChild(card)
     })
+
+    getExistencias();
   })
 
   searchButton.style.opacity = 1
