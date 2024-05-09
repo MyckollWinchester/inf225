@@ -2,41 +2,53 @@ import unittest
 import requests
 
 class TestEndpoints(unittest.TestCase):
-    valid_source_destination_request_data = None
-    invalid_source_destination_request_data = None
+    valid_marcador_tallerista_request_data = None
+    valid_insumo_request_data = None
+    invalid_tallerista_request_data = None
 
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://localhost:8000/buscar-persona-en-db/?prompt="
+        cls.base_url = "http://localhost:8000/"
 
-        cls.valid_source_destination_request_data = {
-            "source_easting": "https://cl.linkedin.com/in/paola-saffirio-022058195",
-            "destination_easting": True,
-            "source_northing": "https://cl.linkedin.com/in/luciaborquez",
-            "destination_northing": False
+        cls.valid_marcador_tallerista_request_data = {
+            "url_paola": "https://cl.linkedin.com/in/paola-saffirio-022058195",
+            "url_daniela": "https://www.linkedin.com/in/daniela-sala-2b913964/",
         }
 
-        cls.invalid_source_destination_request_data = {
-            "source_easting": "",
-            "destination_easting": "Err",
-            "source_northing": "",
-            "destination_northing": "Err"
+        cls.valid_insumo_request_data = {
+            "insumo": "leche",
+        }
+
+        cls.invalid_request_data = {
+            "url_vacio": "",
         }
 
     @classmethod
     def tearDownClass(cls):
-        del cls.valid_source_destination_request_data
-        del cls.invalid_source_destination_request_data
+        del cls.valid_marcador_tallerista_request_data
+        del cls.invalid_tallerista_request_data
 
-    def test_existence(self):
-        response = requests.get(self.base_url + self.valid_source_destination_request_data["source_easting"])
-
+    def test_marcadores_valid_prompt(self):
+        response = requests.get(self.base_url + "buscar-persona-en-db/?prompt=" + self.valid_marcador_tallerista_request_data["url_paola"])
         self.assertEqual("true", response.text)
 
-    def test_existence_invalid_prompt(self):
-        response = requests.get(self.base_url + self.invalid_source_destination_request_data["source_easting"])
+        response = requests.get(self.base_url + "buscar-persona-en-db/?prompt=" + self.valid_marcador_tallerista_request_data["url_daniela"])
+        self.assertEqual("true", response.text)
 
+    def test_marcadores_invalid_prompt(self):
+        response = requests.get(self.base_url + "buscar-persona-en-db/?prompt=" + self.invalid_request_data["url_vacio"])
         self.assertEqual(400, response.status_code)
+
+    def test_buscar_insumo_valid_prompt(self):
+        response = requests.get(self.base_url + "buscar-insumo/?prompt=" + self.valid_insumo_request_data["insumo"])
+        self.assertEqual(200, response.status_code)
+
+    def test_buscar_insumo_invalid_prompt(self):
+        response = requests.get(self.base_url + "buscar-insumo/?prompt=" + self.invalid_request_data["url_vacio"])
+        self.assertEqual(400, response.status_code)
+    
+
+
 
 if __name__ == '__main__':
     unittest.main()
