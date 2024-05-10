@@ -14,10 +14,11 @@
   padding: 32px;
   border-radius: 8px;
   border: 1px solid #C0C8D3;
-}
-.box__image {
-  padding: 16px;
-  margin-bottom: 24px;
+
+  &__image {
+    padding: 16px;
+    margin-bottom: 24px;
+  }
 }
 
 h1 {
@@ -32,4 +33,4 @@ h2 {
 
 h2 + a {
   margin-top: 16px;
-}/*# sourceMappingURL=404.css.map */
+}
