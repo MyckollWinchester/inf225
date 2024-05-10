@@ -3,9 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from database.models.tallerista import Tallerista
+from database.models.propuesta import Propuesta
 from database.scripts.web_scrapers import jumbo_search
 from database.scripts.openai_api import description_filter
 from database.scripts.google_api import google_custom_search
+from database.scripts.validators import validate_propuesta_taller
 
 app = FastAPI()
 client = AsyncIOMotorClient("mongodb://localhost:27017")
@@ -75,7 +77,6 @@ async def desmarcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
             detail="Tallerista no se encuentra en los marcadores."
         )
 
-
 @app.get("/buscar-persona-en-db/")
 async def buscar_persona_en_db(prompt: str):
     if not prompt:
@@ -90,3 +91,15 @@ async def buscar_persona_en_db(prompt: str):
         if tallerista_db:
             #tallerista_db['_id'] = str(tallerista_db['_id'])
             return True
+
+@app.post("/propuestas/")
+async def propuestas(form: dict):
+    if not validate_propuesta_taller(form):
+        raise HTTPException(
+            status_code=400,
+            detail="Formulario inválido."
+        )
+    form["nombre_taller"] = form.pop("nombre-taller")
+    propuesta = Propuesta(**form)
+    await db["propuestas"].insert_one(propuesta.model_dump())
+    return { "status": 200, "message": "Propuesta enviada." } 

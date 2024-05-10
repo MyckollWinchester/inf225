@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}">
+{% endblock %}
+
+
+{% block content %}
+{% block navbar %}{% endblock %}
+<div class="container">
+  <div class="box">
+    <img src="{{ url_for('static', filename='img/form-success.png') }}" alt="Éxito" class="box__image">
+    <h1>Éxito</h1>
+    <h2>¡Hemos recibido su propuesta!</h2>
+    <h2>Prontamente lo contactaremos.</h2>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script class="view-script"></script>
+{% endblock %}
