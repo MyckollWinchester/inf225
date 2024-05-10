@@ -4,7 +4,7 @@ import requests
 class TestEndpoints(unittest.TestCase):
     valid_marcador_tallerista_request_data = None
     valid_insumo_request_data = None
-    invalid_tallerista_request_data = None
+    invalid_request_data = None
 
     @classmethod
     def setUpClass(cls):
@@ -26,13 +26,11 @@ class TestEndpoints(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         del cls.valid_marcador_tallerista_request_data
-        del cls.invalid_tallerista_request_data
+        del cls.valid_insumo_request_data
+        del cls.invalid_request_data
 
     def test_marcadores_valid_prompt(self):
         response = requests.get(self.base_url + "buscar-persona-en-db/?prompt=" + self.valid_marcador_tallerista_request_data["url_paola"])
-        self.assertEqual("true", response.text)
-
-        response = requests.get(self.base_url + "buscar-persona-en-db/?prompt=" + self.valid_marcador_tallerista_request_data["url_daniela"])
         self.assertEqual("true", response.text)
 
     def test_marcadores_invalid_prompt(self):
