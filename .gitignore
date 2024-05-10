@@ -4,3 +4,4 @@ __pycache__
 *.css.map
 *.bak*
 .temp
+.vscode
