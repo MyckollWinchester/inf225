@@ -21,12 +21,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/talleristas/", response_model=list[Tallerista])
 async def get_talleristas() -> list[Tallerista]:
     return await db["talleristas"].find().to_list(128)
 
 @app.post("/verificar-tallerista/", response_model=Tallerista)
 async def verificar_tallerista(tallerista: Tallerista) -> Tallerista:
+    if not await db["talleristas"].find_one({"enlace": tallerista.enlace}):
+        raise HTTPException(
+            status_code=404,
+            detail="Tallerista no encontrado."
+        )
     return await db["talleristas"].find_one_and_update(
         {"enlace": tallerista.enlace},
         {"$set": {"verificado": not tallerista.verificado}},
@@ -70,10 +76,10 @@ async def desmarcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
     if tallerista_db:
         tallerista = tallerista.model_dump()
         await db["talleristas"].delete_one(tallerista)
-        return { "status": 200, "message": "Tallerista eliminado." } 
+        return { "status": 200, "message": "Tallerista desmarcado." } 
     else:
         raise HTTPException(
-            status_code=409,
+            status_code=404,
             detail="Tallerista no se encuentra en los marcadores."
         )
 
@@ -87,9 +93,7 @@ async def buscar_persona_en_db(prompt: str):
     
     else:
         tallerista_db = await db["talleristas"].find_one({"enlace": prompt})
-        #print(tallerista_db)
         if tallerista_db:
-            #tallerista_db['_id'] = str(tallerista_db['_id'])
             return True
 
 @app.post("/propuestas/")
