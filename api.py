@@ -146,3 +146,7 @@ async def buscar_insumo_en_db(prompt: str):
         insumo_db = await db["insumos"].find_one({"enlace": prompt})
         if insumo_db:
             return True
+        
+@app.get("/insumos/", response_model=list[Insumo])
+async def get_insumos() -> list[Insumo]:
+    return await db["insumos"].find().to_list(128)
