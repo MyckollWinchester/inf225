@@ -1,0 +1,35 @@
+@charset "UTF-8";
+:root {
+  --main-color-accent: #6366F1;
+  --primary-text-color: #1B2027;
+  --secondary-text-color: #FFFFFF;
+  --placeholder-text-color: #B9BCC8;
+  --primary-bg-color: #F7F8FB;
+  --secondary-bg-color: #FFFFFF;
+  --primary-line-color: #D6DBE4;
+  --secondary-line-color: #B2B7BE;
+}
+
+.container {
+  max-width: 896px;
+}
+
+.help {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.help__paragraph {
+  color: var(--primary-text-color);
+  font-weight: 300;
+  margin-left: 16px;
+}
+.help__paragraph::before {
+  position: absolute;
+  content: "■";
+  transform: translateX(-16px);
+}
+
+.bold {
+  font-weight: 500;
+}/*# sourceMappingURL=index.css.map */
