@@ -4,6 +4,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from database.models.tallerista import Tallerista
 from database.models.propuesta import Propuesta
+from database.models.insumo import Insumo
 from database.scripts.web_scrapers import jumbo_search
 from database.scripts.openai_api import description_filter
 from database.scripts.google_api import google_custom_search
@@ -107,3 +108,45 @@ async def propuestas(form: dict):
     propuesta = Propuesta(**form)
     await db["propuestas"].insert_one(propuesta.model_dump())
     return { "status": 200, "message": "Propuesta enviada." } 
+
+@app.post("/marcar-insumo/", response_model=dict[str, int | str])
+async def marcar_insumo(insumo: Insumo) -> dict[str, str]:
+    insumo_db = await db["insumos"].find_one({"enlace": insumo.enlace})
+    if insumo_db:
+        raise HTTPException(
+            status_code=409,
+            detail="Insumo ya se encuentra en los marcadores."
+        )
+    insumo = insumo.model_dump()
+    await db["insumos"].insert_one(insumo)
+    return { "status": 200, "message": "Insumo marcado." } 
+
+@app.post("/desmarcar-insumo/", response_model=dict[str, int | str])
+async def desmarcar_insumo(insumo: Insumo) -> dict[str, str]:
+    insumo_db = await db["insumos"].find_one({"enlace": insumo.enlace})
+    if insumo_db:
+        insumo = insumo.model_dump()
+        await db["insumos"].delete_one(insumo)
+        return { "status": 200, "message": "Insumo desmarcado." } 
+    else:
+        raise HTTPException(
+            status_code=404,
+            detail="Insumo no se encuentra en los marcadores."
+        )
+    
+@app.get("/buscar-insumo-en-db/")
+async def buscar_insumo_en_db(prompt: str):
+    if not prompt:
+        raise HTTPException(
+            status_code=400,
+            detail="Búsqueda vacía."
+        )
+    
+    else:
+        insumo_db = await db["insumos"].find_one({"enlace": prompt})
+        if insumo_db:
+            return True
+        
+@app.get("/insumos/", response_model=list[Insumo])
+async def get_insumos() -> list[Insumo]:
+    return await db["insumos"].find().to_list(128)

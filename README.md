@@ -14,7 +14,7 @@ Continuación del proyecto de Análisis y Diseño de Software 2023-2.
 - Python >3.12
 - MongoDB >7.0
 
-MongoDB debe estar corriendo en el puerto 27017 y debe tener una base de datos llamada `apprende-custom-search` con las colecciones: `talleres` y `propuestas`.
+MongoDB debe estar corriendo en el puerto 27017 y debe tener una base de datos llamada `apprende-custom-search` con las colecciones: `talleres`, `propuestas` e `insumos`.
 
 ## API Keys
 
