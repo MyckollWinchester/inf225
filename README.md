@@ -2,6 +2,10 @@
 
 Continuación del proyecto de Análisis y Diseño de Software 2023-2.
 
+## Video presentación - hito 4
+
+https://youtu.be/3orKcFlz7tg
+
 ## Integrantes
 
 - Gabriel Apablaza V.
