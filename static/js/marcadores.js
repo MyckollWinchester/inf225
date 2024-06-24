@@ -199,11 +199,12 @@ insumos.then(response => {
       deleteButton.appendChild(deleteButtonSVG)
       
 
+      card.appendChild(deleteButton)
       card.appendChild(imageContainer)
       card.appendChild(name)
       card.appendChild(price)
       card.appendChild(button)
-      card.appendChild(deleteButton)
+
 
       insumosPh.appendChild(card)
     })
