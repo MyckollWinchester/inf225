@@ -1,10 +1,17 @@
 const talleristasPh = document.getElementById('talleristas-ph')
 
-const talleristas = fetch('http://localhost:8000/talleristas')
+//const talleristas = fetch('http://localhost:8000/talleristas')
 
-talleristas.then(response => {
-  return response.json()
-}).then(data => {
+function fetchTalleristas(){
+  return fetch('http://localhost:8000/talleristas')
+    .then(response => response.json())
+    .catch(error => {
+      console.log("Error al obtener talleristas: ", error)
+      throw error
+    })
+}
+
+function mostrarTalleristas(data, filtro){ 
   if (data.length > 0) {
     talleristasPh.innerHTML = ''
     talleristasPh.classList.remove('note')
@@ -13,6 +20,7 @@ talleristas.then(response => {
     talleristasPh.style.gap = '16px'
 
     let i = 0
+
 
     data.forEach(tallerista => {
       i++
@@ -73,7 +81,7 @@ talleristas.then(response => {
     for (let i = 1; i <= data.length; i++) {
       const button = document.getElementById(`verificar-${i}`)
       button.addEventListener('click', e => {
-        verificarTallerista(e, i, data[i - 1])
+        verificarTallerista(e, i, data[i - 1], filtro)
       })
     }
 
@@ -84,9 +92,9 @@ talleristas.then(response => {
       })
     }
   }
-})
+}
 
-const verificarTallerista = (e, i, data) => {
+const verificarTallerista = (e, i, data, filtro) => {
   e.preventDefault()
   fetch('http://localhost:8000/verificar-tallerista', {
     method: 'POST',
@@ -105,8 +113,14 @@ const verificarTallerista = (e, i, data) => {
     const button = document.getElementById(`verificar-${i}`)
 
     button.innerHTML = data.verificado ? "Verificado" : "No verificado"
-    button.classList.remove(`tallerista-card__button--${!data.verificado}`)
-    button.classList.add(`tallerista-card__button--${data.verificado}`)
+
+    if ((filtro === 'verificado' && data.verificado) || (filtro === 'no-verificado' && !data.verificado) || filtro !== 'verificado' && filtro !== 'no-verificado') {
+      button.classList.remove(`tallerista-card__button--${!data.verificado}`)
+      button.classList.add(`tallerista-card__button--${data.verificado}`)
+      
+    } else {
+      document.getElementById(`tallerista-card-${i}`).remove()
+    }
   })
 }
 
@@ -131,6 +145,37 @@ const eliminarTallerista = (e, i, data) => {
   })
 }
 
+
+// filtrar talleristas
+
+let filterSelect = document.getElementById('select-filter')
+
+function filtrarTalleristas(filtro){
+  fetchTalleristas()
+    .then(data => {
+      let dataTalleristas = data
+      if (filtro === 'verificado') {
+        dataTalleristas = data.filter(item => item.verificado === true)
+      } else if (filtro === 'no-verificado') {
+        dataTalleristas = data.filter(item => item.verificado === false)
+      }
+
+      mostrarTalleristas(dataTalleristas, filtro)
+    })
+}
+
+filterSelect.addEventListener('change', function() {
+  let filtro = filterSelect.value
+
+  filtrarTalleristas(filtro)
+})
+
+filtrarTalleristas('todo')
+
+
+
+
+// I N S U M O S
 
 const insumosPh = document.getElementById('insumos-ph')
 
@@ -238,3 +283,4 @@ const eliminarInsumo = (e, i, data) => {
     }
   })
 }
+
