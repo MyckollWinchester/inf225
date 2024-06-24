@@ -87,7 +87,7 @@ talleristas.then(response => {
 })
 
 const verificarTallerista = (e, i, data) => {
-  e.preventDefault();
+  e.preventDefault()
   fetch('http://localhost:8000/verificar-tallerista', {
     method: 'POST',
     body: JSON.stringify(data),
@@ -96,22 +96,22 @@ const verificarTallerista = (e, i, data) => {
     }
   })
   .then(response => {
-    return response.json();
+    return response.json()
   })
   .then(updatedData => {
-    console.log(updatedData);
-    data.verificado = updatedData.verificado;
+    console.log(updatedData)
+    data.verificado = updatedData.verificado
 
-    const button = document.getElementById(`verificar-${i}`);
+    const button = document.getElementById(`verificar-${i}`)
 
-    button.innerHTML = data.verificado ? "Verificado" : "No verificado";
-    button.classList.remove(`tallerista-card__button--${!data.verificado}`);
-    button.classList.add(`tallerista-card__button--${data.verificado}`);
-  });
-};
+    button.innerHTML = data.verificado ? "Verificado" : "No verificado"
+    button.classList.remove(`tallerista-card__button--${!data.verificado}`)
+    button.classList.add(`tallerista-card__button--${data.verificado}`)
+  })
+}
 
 const eliminarTallerista = (e, i, data) => {
-  e.preventDefault();
+  e.preventDefault()
   fetch('http://localhost:8000/desmarcar-tallerista/', {
     method: 'POST',
     cors: 'no-cors',
@@ -126,10 +126,10 @@ const eliminarTallerista = (e, i, data) => {
   .then(data => {
     if (data.status === 200) {
       console.log('Tallerista eliminado')
-      document.getElementById(`tallerista-card-${i}`).remove();
+      document.getElementById(`tallerista-card-${i}`).remove()
     }
   })
-};
+}
 
 
 const insumosPh = document.getElementById('insumos-ph')
@@ -219,7 +219,7 @@ insumos.then(response => {
 })
 
 const eliminarInsumo = (e, i, data) => {
-  e.preventDefault();
+  e.preventDefault()
   fetch('http://localhost:8000/desmarcar-insumo/', {
     method: 'POST',
     cors: 'no-cors',
@@ -234,7 +234,7 @@ const eliminarInsumo = (e, i, data) => {
   .then(data => {
     if (data.status === 200) {
       console.log('Inusmo eliminado')
-      document.getElementById(`insumo-card-${i}`).remove();
+      document.getElementById(`insumo-card-${i}`).remove()
     }
   })
-};
+}
