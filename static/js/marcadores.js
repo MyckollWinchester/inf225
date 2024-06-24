@@ -18,6 +18,7 @@ talleristas.then(response => {
       i++
       const card = document.createElement('div')
       card.classList.add('tallerista-card')
+      card.id = `tallerista-card-${i}`  
 
       const image = document.createElement('img')
       image.src = tallerista.foto_perfil
@@ -37,11 +38,34 @@ talleristas.then(response => {
       li.innerHTML = `&#10095;<a href="${tallerista.enlace}" class="tallerista-card__linkedin">${tallerista.enlace}</a>
       <a id="verificar-${i}" href="" class="button button--green tallerista-card__button tallerista-card__button--${tallerista.verificado}">${tallerista.verificado ? "Verificado" : "No verificado" }</a>`
 
+      const deleteButton = document.createElement('button')
+      deleteButton.classList.add('fav-button')
+      
+      const deleteButtonSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+      deleteButtonSVG.setAttribute('width', '32px')
+      deleteButtonSVG.setAttribute('height', '24px')
+      deleteButtonSVG.setAttribute('viewBox', '0 0 24 24')
+      deleteButtonSVG.setAttribute('fill', 'none')
+      
+      const deleteButtonPath = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+      deleteButtonPath.setAttribute('d', 'M18 6L6 18M6 6l12 12')
+      deleteButtonPath.setAttribute('stroke', '#1B2027')
+      deleteButtonPath.setAttribute('stroke-width', '2')
+      deleteButtonPath.setAttribute('stroke-linecap', 'round')
+      deleteButtonPath.setAttribute('stroke-linejoin', 'round')
+      
+      deleteButtonSVG.appendChild(deleteButtonPath)
+      deleteButton.id = `eliminar-tallerista-${i}`
+      deleteButton.appendChild(deleteButtonSVG)
+
       ul.appendChild(li)
       div.appendChild(title)
+      card.appendChild(deleteButton)
       div.appendChild(ul)
       card.appendChild(image)
+
       card.appendChild(div)
+
       console.log(card)
       talleristasPh.appendChild(card)
     })
@@ -50,6 +74,13 @@ talleristas.then(response => {
       const button = document.getElementById(`verificar-${i}`)
       button.addEventListener('click', e => {
         verificarTallerista(e, i, data[i - 1])
+      })
+    }
+
+    for (let i = 1; i <= data.length; i++) {
+      const button = document.getElementById(`eliminar-tallerista-${i}`)
+      button.addEventListener('click', e => {
+        eliminarTallerista(e, i, data[i - 1])
       })
     }
   }
@@ -77,6 +108,27 @@ const verificarTallerista = (e, i, data) => {
     button.classList.remove(`tallerista-card__button--${!data.verificado}`);
     button.classList.add(`tallerista-card__button--${data.verificado}`);
   });
+};
+
+const eliminarTallerista = (e, i, data) => {
+  e.preventDefault();
+  fetch('http://localhost:8000/desmarcar-tallerista/', {
+    method: 'POST',
+    cors: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    return response.json()
+  })
+  .then(data => {
+    if (data.status === 200) {
+      console.log('Tallerista eliminado')
+      document.getElementById(`tallerista-card-${i}`).remove();
+    }
+  })
 };
 
 

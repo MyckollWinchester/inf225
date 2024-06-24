@@ -150,3 +150,17 @@ async def buscar_insumo_en_db(prompt: str):
 @app.get("/insumos/", response_model=list[Insumo])
 async def get_insumos() -> list[Insumo]:
     return await db["insumos"].find().to_list(128)
+
+
+@app.post("/desmarcar-tallerista/", response_model=dict[str, int | str])
+async def desmarcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
+    tallerista_db = await db["talleristas"].find_one({"enlace": tallerista.enlace})
+    if tallerista_db:
+        tallerista = tallerista.model_dump()
+        await db["talleristas"].delete_one(tallerista)
+        return { "status": 200, "message": "Tallerista desmarcado." } 
+    else:
+        raise HTTPException(
+            status_code=404,
+            detail="Tallerista no se encuentra en los marcadores."
+        )
