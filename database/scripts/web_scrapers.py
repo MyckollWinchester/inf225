@@ -26,7 +26,7 @@ def process_url(url: str) -> None:
     product_image_url = soup.find("meta", {"property": "og:image"})["content"]
     productos.append(Producto(product_name, product_price, url, product_image_url))
 
-def jumbo_search(query: str) -> list[dict]:
+def jumbo_search(query: str) -> list[dict] | None:
     global productos
     url = f"https://www.jumbo.cl/busqueda?ft={query}"
     response = requests.get(url, timeout=5)

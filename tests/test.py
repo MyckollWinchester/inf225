@@ -83,17 +83,17 @@ class TestEndpoints(unittest.TestCase):
         response = requests.get(self.base_url + "talleristas/")
         self.assertEqual(200, response.status_code)
 
-    def verificar_tallerista_valid_prompt(self):
+    def test_verificar_tallerista_valid_prompt(self):
         requests.post(self.base_url + "marcar-tallerista/", json=self.valid_tallerista)
         response = requests.post(self.base_url + "verificar-tallerista/", json=self.valid_tallerista)
         self.assertEqual(200, response.status_code)
 
-    def verificar_tallerista_invalid_prompt(self):
+    def test_verificar_tallerista_invalid_prompt(self):
         requests.post(self.base_url + "desmarcar-tallerista/", json=self.valid_tallerista)
         response = requests.post(self.base_url + "verificar-tallerista/", json=self.valid_tallerista)
         self.assertEqual(404, response.status_code)
 
-    def buscar_tallerista_valid_prompt(self):
+    def test_buscar_tallerista_valid_prompt(self):
         response = requests.get(self.base_url + "buscar-tallerista/?prompt=" + self.valid_tallerista_description["prompt"])
         self.assertEqual(200, response.status_code)
 

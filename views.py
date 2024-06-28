@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, Response
 from database.scripts.validators import validate_propuesta_taller
 import requests
 
@@ -23,7 +23,7 @@ def marcadores() -> str:
 
 @views.get("/propuesta-taller")
 @views.post("/propuesta-taller")
-def propuesta_taller() -> str:
+def propuesta_taller() -> str | Response:
     if request.method == "GET":
         return render_template("propuesta_taller.html")
     else:
