@@ -4,12 +4,12 @@ const searchForm = document.getElementById('search-form-talleristas')
 
 async function getTalleristas(prompt) {
   const response = await fetch(`http://localhost:8000/buscar-tallerista/?prompt=${prompt}`)
-  return await response.json()  
+  return await response.json()
 }
 
 async function getExistencia(prompt) {
   const response = await fetch(`http://localhost:8000/buscar-persona-en-db/?prompt=${prompt}`)
-  return await response.json()  
+  return await response.json()
 }
 
 async function getExistencias() {
@@ -26,7 +26,7 @@ async function getExistencias() {
     if (existencia) {
       favButton.children[0].setAttribute('fill', '#1B2027');
       favButton.classList.toggle('fav-button--active');
-      
+
     }
   });
 }
@@ -143,7 +143,7 @@ searchForm.addEventListener('submit', async e => {
       const cardProfile = cardLeft.children[1]
       const cardLinkedIn = cardProfile.children[1]
       const linkedin = cardLinkedIn.href
-      
+
       if (favButton.classList.contains('fav-button--active')) {
         const cardName = cardProfile.children[0]
         const cardImage = cardLeft.children[0]
@@ -160,13 +160,15 @@ searchForm.addEventListener('submit', async e => {
           },
           body: JSON.stringify(favTallerista)
         })
-        .then(response => {
-          return response.json()
-        })
-        .then(data => {
-          if (data.status === 200) console.log('Tallerista eliminado')
-            favButton.classList.remove('fav-button--active');
-        })
+          .then(response => {
+            return response.json()
+          })
+          .then(data => {
+            if (data.status === 200) {
+              console.log('Tallerista eliminado')
+              favButton.classList.remove('fav-button--active')
+            }
+          })
       } else {
         const cardName = cardProfile.children[0]
         const cardImage = cardLeft.children[0]
@@ -183,13 +185,13 @@ searchForm.addEventListener('submit', async e => {
           },
           body: JSON.stringify(favTallerista)
         })
-        .then(response => {
-          return response.json()
-        })
-        .then(data => {
-          if (data.status === 200) console.log('Tallerista marcado como favorito')
-          favButton.classList.toggle('fav-button--active')
-        })
+          .then(response => {
+            return response.json()
+          })
+          .then(data => {
+            if (data.status === 200) console.log('Tallerista marcado como favorito')
+            favButton.classList.toggle('fav-button--active')
+          })
       }
     })
   })

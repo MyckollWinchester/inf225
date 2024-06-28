@@ -11,7 +11,7 @@ async function getInsumos(prompt) {
 
 async function getExistencia(prompt) {
   const response = await fetch(`http://localhost:8000/buscar-insumo-en-db/?prompt=${prompt}`)
-  return await response.json()  
+  return await response.json()
 }
 
 async function getExistencias() {
@@ -26,7 +26,7 @@ async function getExistencias() {
     if (existencia) {
       favButton.children[0].setAttribute('fill', '#1B2027');
       favButton.classList.toggle('fav-button--active');
-      
+
     }
   });
 }
@@ -48,7 +48,7 @@ searchForm.addEventListener('submit', async e => {
   searchButton.setAttribute('disabled', '')
 
   searchButton.style.cursor = 'default'
-  
+
   await getInsumos(searchInput.value).then(insumos => {
     const insumosRes = document.getElementById('insumo-search-results')
     insumosRes.innerHTML = ''
@@ -147,9 +147,9 @@ searchForm.addEventListener('submit', async e => {
       const cardLink = card.children[3]
       const link = cardLink.href
 
-      const favInsumo = {nombre: name, enlace: link, foto: image, precio: price}
+      const favInsumo = { nombre: name, enlace: link, foto: image, precio: price }
       console.log(favInsumo)
-      
+
       if (favButton.classList.contains('fav-button--active')) {
         console.log("BORRANDO...")
 
@@ -161,13 +161,15 @@ searchForm.addEventListener('submit', async e => {
           },
           body: JSON.stringify(favInsumo)
         })
-        .then(response => {
-          return response.json()
-        })
-        .then(data => {
-          if (data.status === 200) console.log('Inusmo eliminado')
-            favButton.classList.remove('fav-button--active');
-        })
+          .then(response => {
+            return response.json()
+          })
+          .then(data => {
+            if (data.status === 200) {
+              console.log('Inusmo eliminado')
+              favButton.classList.remove('fav-button--active')
+            }
+          })
 
       } else {
         console.log("AGREGANDO...")
@@ -180,13 +182,13 @@ searchForm.addEventListener('submit', async e => {
           },
           body: JSON.stringify(favInsumo)
         })
-        .then(response => {
-          return response.json()
-        })
-        .then(data => {
-          if (data.status === 200) console.log('Insumo marcado como favorito')
-          favButton.classList.toggle('fav-button--active')
-        })
+          .then(response => {
+            return response.json()
+          })
+          .then(data => {
+            if (data.status === 200) console.log('Insumo marcado como favorito')
+            favButton.classList.toggle('fav-button--active')
+          })
       }
     })
   })
