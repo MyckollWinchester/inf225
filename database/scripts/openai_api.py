@@ -8,7 +8,8 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def description_filter(prompt: str) -> str:
-    return prompt
+    """
+    # No se puede utilizar la API de OpenAI
     return client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{
@@ -17,6 +18,8 @@ def description_filter(prompt: str) -> str:
         }],
         max_tokens=32,
     ).choices[0].message.content
+    """
+    return prompt
 
 if __name__ == "__main__":
     prompt = "Voy a realizar un taller de pintura al óleo, asistirán aproximadamente 20 personas de manera presencial, cerca de quinta normal"
