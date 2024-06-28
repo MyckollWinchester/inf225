@@ -22,6 +22,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+DETAILS = {
+    "t-not-found": "Tallerista no encontrado.",
+    "t-already-bookmarked": "Tallerista ya se encuentra en los marcadores.",
+    "t-not-bookmarked": "Tallerista no se encuentra en los marcadores.",
+    "i-not-found": "Insumo no encontrado.",
+    "i-already-bookmarked": "Insumo ya se encuentra en los marcadores.",
+    "i-not-bookmarked": "Insumo no se encuentra en los marcadores.",
+    "empty-search": "Búsqueda vacía.",
+    "invalid-form": "Formulario inválido."
+}
 
 @app.get("/talleristas/", response_model=list[Tallerista])
 async def get_talleristas() -> list[Tallerista]:
@@ -32,7 +42,7 @@ async def verificar_tallerista(tallerista: Tallerista) -> Tallerista:
     if not await db["talleristas"].find_one({"enlace": tallerista.enlace}):
         raise HTTPException(
             status_code=404,
-            detail="Tallerista no encontrado."
+            detail=DETAILS["t-not-found"]
         )
     return await db["talleristas"].find_one_and_update(
         {"enlace": tallerista.enlace},
@@ -45,7 +55,7 @@ async def buscar_tallerista(prompt: str) -> list[dict]:
     if not prompt:
         raise HTTPException(
             status_code=400,
-            detail="Búsqueda vacía."
+            detail=DETAILS["empty-search"]
         )
     filtered_prompt = description_filter(prompt)
     return google_custom_search(filtered_prompt)
@@ -55,7 +65,7 @@ async def buscar_insumo(prompt: str) -> list[dict]:
     if not prompt:
         raise HTTPException(
             status_code=400,
-            detail="Búsqueda vacía."
+            detail=DETAILS["empty-search"]
         )
     return jumbo_search(prompt)
 
@@ -65,7 +75,7 @@ async def marcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
     if tallerista_db:
         raise HTTPException(
             status_code=409,
-            detail="Tallerista ya se encuentra en los marcadores."
+            detail=DETAILS["t-already-bookmarked"]
         )
     tallerista = tallerista.model_dump()
     await db["talleristas"].insert_one(tallerista)
@@ -81,7 +91,7 @@ async def desmarcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
     else:
         raise HTTPException(
             status_code=404,
-            detail="Tallerista no se encuentra en los marcadores."
+            detail=DETAILS["t-not-bookmarked"]
         )
 
 @app.get("/buscar-persona-en-db/")
@@ -89,7 +99,7 @@ async def buscar_persona_en_db(prompt: str):
     if not prompt:
         raise HTTPException(
             status_code=400,
-            detail="Búsqueda vacía."
+            detail=DETAILS["empty-search"]
         )
     
     else:
@@ -102,7 +112,7 @@ async def propuestas(form: dict):
     if not validate_propuesta_taller(form):
         raise HTTPException(
             status_code=400,
-            detail="Formulario inválido."
+            detail=DETAILS["invalid-form"]
         )
     form["nombre_taller"] = form.pop("nombre-taller")
     propuesta = Propuesta(**form)
@@ -115,7 +125,7 @@ async def marcar_insumo(insumo: Insumo) -> dict[str, str]:
     if insumo_db:
         raise HTTPException(
             status_code=409,
-            detail="Insumo ya se encuentra en los marcadores."
+            detail=DETAILS["i-already-bookmarked"]
         )
     insumo = insumo.model_dump()
     await db["insumos"].insert_one(insumo)
@@ -131,22 +141,21 @@ async def desmarcar_insumo(insumo: Insumo) -> dict[str, str]:
     else:
         raise HTTPException(
             status_code=404,
-            detail="Insumo no se encuentra en los marcadores."
+            detail=DETAILS["i-not-bookmarked"]
         )
-    
+
 @app.get("/buscar-insumo-en-db/")
 async def buscar_insumo_en_db(prompt: str):
     if not prompt:
         raise HTTPException(
             status_code=400,
-            detail="Búsqueda vacía."
+            detail=DETAILS["empty-search"]
         )
-    
     else:
         insumo_db = await db["insumos"].find_one({"enlace": prompt})
         if insumo_db:
             return True
-        
+
 @app.get("/insumos/", response_model=list[Insumo])
 async def get_insumos() -> list[Insumo]:
     return await db["insumos"].find().to_list(128)
@@ -162,5 +171,5 @@ async def desmarcar_tallerista(tallerista: Tallerista) -> dict[str, str]:
     else:
         raise HTTPException(
             status_code=404,
-            detail="Tallerista no se encuentra en los marcadores."
+            detail=DETAILS["t-not-bookmarked"]
         )

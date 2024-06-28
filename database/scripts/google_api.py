@@ -21,7 +21,7 @@ def google_custom_search(consulta):
         for item in respuesta_api['items']:
             try:
                 item['pagemap']['metatags'][0]['og:image']
-            except:
+            except KeyError:
                 continue
             tallerista = Tallerista(
                 nombre=item['title'],
